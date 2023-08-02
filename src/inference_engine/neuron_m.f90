@@ -1,8 +1,8 @@
 ! Copyright (c), The Regents of the University of California
 ! Terms of use are as specified in LICENSE.txt
 module neuron_m
-  !use string_m, only : string_t
-  use sourcery_m, only : string_t
+  use string_m, only : string_t
+  !use sourcery_m, only : string_t
   use kind_parameters_m, only : rkind
   implicit none
 
@@ -25,11 +25,12 @@ module neuron_m
 
   interface neuron_t
 
-    pure recursive module function construct(neuron_lines, start) result(neuron)
+   pure recursive module function construct(neuron_lines, start) result(neuron)
       !! construct linked list of neuron_t objects from an array of JSON-formatted text lines
       implicit none
       type(string_t), intent(in) :: neuron_lines(:)
       integer, intent(in) :: start
+      !type(neuron_t), target :: neuron
       type(neuron_t) neuron
     end function
 

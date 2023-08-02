@@ -13,13 +13,17 @@ contains
     integer num_inputs, neurons_in_layer
     character(len=:), allocatable :: line
     logical hidden_layers, output_layer
+    
+    type(neuron_t) :: allocated_neuron
 
     line = adjustl(layer_lines(start)%string())
     hidden_layers = line == '['
     output_layer = line == '"output_layer": ['
     call assert(hidden_layers .or. output_layer, "layer_t construct: layer start", line)
 
-    layer%neuron = neuron_t(layer_lines, start+1)
+    allocated_neuron = neuron_t(layer_lines, start+1)
+    layer%neuron = allocated_neuron
+    !layer%neuron = neuron_t(layer_lines, start+1)
     num_inputs = size(layer%neuron%weights())
 
     neuron => layer%neuron
