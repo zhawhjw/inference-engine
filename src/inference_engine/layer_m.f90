@@ -2,7 +2,8 @@
 ! Terms of use are as specified in LICENSE.txt
 module layer_m
   use neuron_m, only : neuron_t
-  use sourcery_m, only : string_t
+  !use sourcery_m, only : string_t
+  use string_m, only : string_t
   use kind_parameters_m, only : rkind
   use inference_engine_m_, only : inference_engine_t
   
@@ -16,6 +17,8 @@ module layer_m
   type layer_t
     !! linked list of layers, each comprised of a linked list of neurons
     private
+    
+    !type(neuron_t), allocatable :: neuron 
     type(neuron_t) neuron !! linked list of this layer's neurons 
     type(layer_t), allocatable :: next !! next layer
   contains
