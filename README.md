@@ -66,3 +66,30 @@ Please see the Inference-Engine GitHub Pages [site] for HTML documentation gener
 [`ford`]: https://github.com/Fortran-FOSS-Programmers/ford
 [nexport]: https://go.lbl.gov/nexport
 [ICAR]: https://github.com/NCAR/icar
+
+Existing Problem
+----------------
+
+If run the 'rebuild.sh' to build the inference-engine at main branch, it currently gives building error:
+```
+././src/inference_engine/layer_s.f90(23): error #6197: An assignment of different structure types is invalid.   [CONSTRUCT]
+    layer%neuron = neuron_t(layer_lines, start+1)
+-------------------^
+
+``` 
+
+Abobe error is produced by changing 
+```
+use sourcery_m, only : string_t
+```
+to
+```
+use string_m, only : string_t
+```
+in script 'src/inference_engine/layer_m.f90'.
+
+
+If revert it back, the following error will appear:
+```
+././src/inference_engine/layer_s.f90: error #6405: The same named entity from different modules and/or program units cannot be referenced.   [STRING_T]
+```
