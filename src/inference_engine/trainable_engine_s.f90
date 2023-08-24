@@ -71,6 +71,19 @@ contains
     type(tensor_t), allocatable :: inputs(:)
     type(tensor_t), allocatable :: expected_outputs(:)
 
+    integer nhidden,nodes_max
+    real(rkind) beta1, beta2, epsilon
+    real(rkind) obeta1, obeta2
+    real(rkind), allocatable :: vdw(:,:,:),sdw(:,:,:)
+    real(rkind), allocatable :: vdb(:,:),sdb(:,:)
+
+    ! Adam parameters  
+    beta1 = .9
+    beta2 = .999
+    obeta1 = 1.d0 - beta1
+    obeta2 = 1.d0 - beta2
+    epsilon = 1.d-8
+
     call self%assert_consistent
 
     associate(output_layer => ubound(self%n,1))
