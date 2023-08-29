@@ -54,7 +54,7 @@ module trainable_engine_m
       class(trainable_engine_t), intent(in) :: self
     end subroutine
 
-    pure module subroutine train(self, mini_batches)
+    module subroutine train(self, mini_batches)
       implicit none
       class(trainable_engine_t), intent(inout) :: self
       type(mini_batch_t), intent(in) :: mini_batches(:)
