@@ -27,7 +27,7 @@ program train_and_write
     type(tensor_t), allocatable :: training_outputs(:,:), tmp2(:), expected_outputs(:)
     real(rkind) t_start, t_end
     real(rkind), allocatable :: harvest(:,:,:)
-    integer, parameter :: num_inputs=2, mini_batch_size = 1, num_iterations=8000000
+    integer, parameter :: num_inputs=2, mini_batch_size = 1, num_iterations=2000000
     integer batch, iter, i
 
     allocate(harvest(num_inputs, mini_batch_size, num_iterations))
@@ -43,6 +43,9 @@ program train_and_write
 
     mini_batches = [(mini_batch_t(input_output_pair_t(training_inputs(:,iter), training_outputs(:,iter))), iter=1, num_iterations)]    
     trainable_engine = one_random_hidden_layer()
+
+    print *,"Mini Batch Rank: ",RANK(mini_batches)
+    print *,"Mini Batch Shape: ",shape(mini_batches)
 
     call cpu_time(t_start)
     call trainable_engine%train(mini_batches)
