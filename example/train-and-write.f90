@@ -27,7 +27,7 @@ program train_and_write
     type(tensor_t), allocatable :: training_outputs(:,:), tmp2(:), expected_outputs(:)
     real(rkind) t_start, t_end
     real(rkind), allocatable :: harvest(:,:,:)
-    integer, parameter :: num_inputs=2, mini_batch_size = 1, num_iterations=2000000
+    integer, parameter :: num_inputs=2, mini_batch_size = 1, num_iterations=80000
     integer batch, iter, i
 
     allocate(harvest(num_inputs, mini_batch_size, num_iterations))
